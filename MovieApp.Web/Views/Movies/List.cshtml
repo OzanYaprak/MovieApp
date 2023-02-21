@@ -1,43 +1,16 @@
-﻿@model List<Movie>
-@{
-    Layout = null;
-}
+﻿@using MovieApp.Web.ViewModels;
+@model MovieGenreViewModel
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>List</title>
-    <style>
-        .film {
-            border: 1px solid;
-            border-color: black;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Film Listesi </h1>
-    <div id="filmler">
-        @foreach (var movie in Model)
-        {
-            <div class="film">
-                <p>@movie.Title</p>
-                <p>@movie.Description</p>
-                <p>@movie.Director</p>
-                <p>
-                    <ul>
-                        @foreach (var cast in movie.Casts)
-                        {
-                            <li>@cast</li>
-                        }
-                    </ul>
-                </p>
-            </div>
-        }
+    @section menu
+    {
+        @await Html.PartialAsync("_menu", Model.Genres)
+    }
 
-    </div>
-</body>
-</html>
+<h1>Film Listesi</h1>
+<div id="filmler">
+    @foreach (var movie in Model.Movies)
+    {
+        @await Html.PartialAsync("_movie", movie)
+    }
+</div>

@@ -27,6 +27,8 @@ namespace MovieApp.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles(); //wwwroot kýsmýný kullanýma açýyor.
+
             app.UseRouting();
 
             // localhost:5000

@@ -1,0 +1,44 @@
+﻿@model Movie
+
+
+
+
+
+
+<div class="row featurette">
+    <div class="col-md-7 order-md-2 mt-2">
+        <h2 class="featurette-heading fw-normal lh-1">@Model.Title<span class="text-muted ms-2">@Model.Director</span></h2>
+        <p class="lead">@Model.Description</p>
+        <p class="lead">
+            <ul>
+                @foreach (var cast in Model.Casts)
+                {
+                    <li>@cast</li>
+                }
+            </ul>
+        </p>
+    </div>
+    <div class="col-md-5 order-md-1">
+        <img src="~/img/@Model.ImageURL" alt="" />
+    </div>
+</div>
+
+
+
+
+@*ESKİ TASARIM*@
+
+@*<div class="film">
+    <img src="/img/@Model.ImageURL" alt="@Model.Title" />
+    <p>@Model.Title</p>
+    <p>@Model.Description</p>
+    <p>@Model.Director</p>
+    <p>
+        <ul>
+            @foreach (var cast in Model.Casts)
+            {
+                <li>@cast</li>
+            }
+        </ul>
+    </p>
+</div>*@

@@ -1,40 +1,17 @@
 ﻿@model Movie
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
+@section header
+    {
+    @await Html.PartialAsync("_header")
+    }
+@section scripts 
+    {
+    <script src="~/js/script.js"></script>
+    }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <style>
-        .film {
-            border: 1px solid;
-            border-color: black;
-            margin-bottom: 10px;
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Film Listesi </h1>
-    <div id="filmler">
-        <div class="film">
-            <p>@Model.Title</p>
-            <p>@Model.Description</p>
-            <p>@Model.Director</p>
-            <p>
-                <ul>
-                     @foreach (var cast in Model.Casts)
-                    {
-                        <li>@cast</li>
-                    }
-                </ul>
-            </p>
-        </div>
-    </div>
-</body>
-</html>
+<h1>Film Listesi </h1>
+<div id="filmler">
+    @await Html.PartialAsync("_movie", Model)
+</div>
+
