@@ -12,13 +12,60 @@ namespace MovieApp.Web.Data
         {
             _movies = new List<Movie>()
             {
-                new Movie {MovieID=1,Title="film 1",Description="açıklama 1", Director="Yönetmen 1", Casts=new string[] {"oyuncu 1","oyuncu 2"}, ImageURL="1.jpg"},
-                new Movie {MovieID=2,Title="film 2",Description="açıklama 2", Director="Yönetmen 2", Casts=new string[] {"oyuncu 1","oyuncu 2"},ImageURL="2.jpg"},
-                new Movie {MovieID=3,Title="film 3",Description="açıklama 3", Director="Yönetmen 3", Casts=new string[] {"oyuncu 1","oyuncu 2"}, ImageURL = "3.jpg"},
-                new Movie {MovieID=4,Title="film 4",Description="açıklama 4", Director="Yönetmen 4", Casts=new string[] {"oyuncu 1","oyuncu 2"}, ImageURL="1.jpg"},
-                new Movie {MovieID=5,Title="film 5",Description="açıklama 5", Director="Yönetmen 5", Casts=new string[] {"oyuncu 1","oyuncu 2"},ImageURL="2.jpg"},
-                new Movie {MovieID=6,Title="film 6",Description="açıklama 6", Director="Yönetmen 6", Casts=new string[] {"oyuncu 1","oyuncu 2"}, ImageURL = "3.jpg"}
-
+                    new Movie {
+                    MovieID=1,
+                    Title="Jiu Jitsu",
+                    Description="Every six years, an ancient order of jiu-jitsu fighters joins forces to battle a vicious race of alien invaders. But when a celebrated war hero goes down in defeat, the fate of the planet and mankind hangs in the balance.",
+                    Director="Dimitri Logothetis",
+                    Casts=new string[] { "Nicolas Cage", "Alain Moussi"},
+                    ImageURL="1.jpg",
+                    GenreID=1
+                },
+                new Movie {
+                    MovieID=2,
+                    Title="Fatman",
+                    Description="A rowdy, unorthodox Santa Claus is fighting to save his declining business. Meanwhile, Billy, a neglected and precocious 12 year old, hires a hit m...",
+                    Director="Eshom Nelms",
+                    Casts=new string[] { "Mel Gibson", "Walton Goggins","Michelle Lan"},
+                    ImageURL="2.jpg",
+                    GenreID=1
+                },
+                new Movie {
+                    MovieID=3,
+                    Title="The Dalton Gang",
+                    Description="When their brother Frank is killed by an outlaw, brothers Bob Dalton, Emmett Dalton and Gray Dalton join their local sheriff's department. When the...",
+                    Director="Christopher Forbes",
+                    Casts=new string[] { "oyuncu 1","oyuncu 2"},
+                    ImageURL="3.jpg",
+                    GenreID=3
+                },
+                    new Movie {
+                    MovieID=4,
+                    Title="Tenet",
+                    Description="Armed with only one word - Tenet - and fighting for the survival of the entire world, the Protagonist journeys through a twilight world of internat...",
+                    Director="Christopher Nolan",
+                    Casts=new string[] { "Robert Pattinson", "Elizabeth Debicki"},
+                    ImageURL="4.jpg",
+                    GenreID=3
+                },
+                new Movie {
+                    MovieID=5,
+                    Title="The Craft: Legacy",
+                    Description="An eclectic foursome of aspiring teenage witches get more than they bargained for as they lean into their newfound powers.",
+                    Director="Zoe Lister-Jones",
+                    Casts=new string[] { "Cailee Spaeny", "Zoey Luna"},
+                    ImageURL="5.jpg",
+                    GenreID=3
+                },
+                new Movie {
+                    MovieID=6,
+                    Title="Hard Kill",
+                    Description="The work of billionaire tech CEO Donovan Chalmers is so valuable that he hires mercenaries to protect it, and a terrorist group kidnaps his daughte...",
+                    Director="Matt Eskandari",
+                    Casts=new string[] { "Bruce Willis", "Jesse Metcalfe"},
+                    ImageURL="6.jpg",
+                    GenreID=4
+                }
             };
         }
 
@@ -29,6 +76,7 @@ namespace MovieApp.Web.Data
 
         public static void Add(Movie movie)
         {
+            movie.MovieID = _movies.Count() + 1;
             _movies.Add(movie);
         }
 

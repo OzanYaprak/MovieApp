@@ -11,12 +11,13 @@
         <span class="fs-5 fw-semibold">Kategoriler</span>
     </a>
     <ul class="list-unstyled ps-0">
+        
+        <a href="/movies/list/" class="list-group-item list-group-item-action@(ViewBag.SelectedGenre==null?"active":"")">Tüm Filmler</a>
+
         @foreach (var genre in Model)
         {
             <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                    @genre.GenreName
-                </button>
+                <a href="/movies/list/@genre.GenreID" class="list-group-item list-group-item-action @(ViewBag.SelectedGenre==genre.GenreID.ToString()?"active":"")">@genre.GenreName</a>
             </li>
         }
 

@@ -12,27 +12,74 @@ namespace MovieApp.Web.Controllers
 
     public class MoviesController : Controller
     {
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult List()
+        [HttpGet]
+        public IActionResult List(int? id, string arama)
         {
-            
+            //var controller = RouteData.Values["controller"];
+            //var action = RouteData.Values["action"];
+            //var genreid = RouteData.Values["id"];
+            //var kelime = HttpContext.Request.Query["arama"].ToString(); //query den gelen arama
+
+
+            var movies = MovieRepository.Movies;
+            if (id != null)
+            {
+                movies = movies.Where(a => a.GenreID == id).ToList();
+            }
+
+
+            //arama kısmı için
+            if (!string.IsNullOrEmpty(arama)) // boş olmayıp bir değer olduğunda çalışmasını (!) sağlıyoruz.
+            {
+                movies = movies.Where(a=>a.Title.ToLower().Contains(arama.ToLower()) || a.Description.ToLower().Contains(arama.ToLower())).ToList(); //tolower arama kısmına yazılan büyük harfli kelimeleri otomatik olarak küçük harf e çeviriyor.
+            }
+
 
             var model = new MoviesViewModel()
             {
-                Movies = MovieRepository.Movies
+                Movies = movies
             };
 
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             return View(MovieRepository.GetById(id));
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Movie ekle)
+        {
+            //var ekle = new Movie()
+            //{
+            //    Title= title,
+            //    Description= description,
+            //    Director= director,
+            //    ImageURL= imageurl,
+            //    GenreID= genreid
+            //};
+            // YUKARIDAKİ KISMI CREATE POSTUNUN İÇERİSİNE PARAMETRE OLARAKDA EKLEYEBİLİRİZ FAKAT BİR DİĞER YÖNTEM İSE BİZİM ZATEN CREATE VİEW I İÇERİSİNDE EKLEMİŞ OLDUĞUMUZ NAME KISIMLARI, MOVİE CLASS I İÇİNDEKİ PARAMETRELER İLE AYNI OLDUĞU İÇİN BURADA CREATE POST KISMININ PARAMETRESİNE Movie ekle YAZARSAK OTOMATİK OLARAK MOVİE CLASSINDAKİ PARAMETRELERİ ekle NİN İÇERİSİNE ATIYOR OLACAK.
+
+
+
+            MovieRepository.Add(ekle);
+
+            return RedirectToAction("List", "Movies");
         }
     }
 }

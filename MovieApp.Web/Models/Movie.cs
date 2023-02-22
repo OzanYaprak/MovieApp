@@ -1,4 +1,6 @@
-﻿namespace MovieApp.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MovieApp.Web.Models
 {
     public class Movie
     {
@@ -8,5 +10,7 @@
         public string Director { get; set; }
         public string[] Casts { get; set; }
         public string ImageURL { get; set; }
+        public int GenreID { get; set; }
+
     }
 }
