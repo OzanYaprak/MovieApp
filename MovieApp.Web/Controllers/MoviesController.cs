@@ -26,18 +26,9 @@ namespace MovieApp.Web.Controllers
                 new Movie {Title="film 3",Description="açıklama 3", Director="Yönetmen 3", Casts=new string[] {"oyuncu 1","oyuncu 2"}, ImageURL = "3.jpg"}
             };
 
-            var turListesi = new List<Genre>()
-            {
-                new Genre {GenreName="Macera"},
-                new Genre {GenreName="Komedi"},
-                new Genre {GenreName="Romantik"},
-                new Genre {GenreName="Savaş"},
-            };
-
             var model = new MovieGenreViewModel()
             {
                 Movies = filmListesi,
-                Genres = turListesi
             };
 
             return View(model);

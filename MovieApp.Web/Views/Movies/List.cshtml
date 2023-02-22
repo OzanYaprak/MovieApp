@@ -4,7 +4,8 @@
 
     @section menu
     {
-        @await Html.PartialAsync("_menu", Model.Genres)
+        @*@await Html.PartialAsync("_menu", Model.Genres)*@
+        @await Component.InvokeAsync("Genres")
     }
 
 <h1>Film Listesi</h1>
