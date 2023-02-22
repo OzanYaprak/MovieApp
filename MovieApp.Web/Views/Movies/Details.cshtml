@@ -1,15 +1,35 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model Movie
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-</body>
-</html>
+
+
+<div class="card">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="/img/@Model.ImageURL" class="card-img"/>
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Title</h5>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text">@Model.Director</p>
+                <p>
+                    <ul>
+                        @foreach (var cast in Model.Casts)
+                        {
+                            <li>@cast</li>
+                        }
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@Model.Title
+<br />
+@Model.Description

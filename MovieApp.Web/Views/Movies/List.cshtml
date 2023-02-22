@@ -1,12 +1,7 @@
 ﻿@using MovieApp.Web.ViewModels;
-@model MovieGenreViewModel
+@model MoviesViewModel
 
 
-    @section menu
-    {
-        @*@await Html.PartialAsync("_menu", Model.Genres)*@
-        @await Component.InvokeAsync("Genres")
-    }
 
 <h1>Film Listesi</h1>
 <div id="filmler">
@@ -15,3 +10,9 @@
         @await Html.PartialAsync("_movie", movie)
     }
 </div>
+
+    @section menu
+    {
+        @*@await Html.PartialAsync("_menu", Model.Genres)*@
+        @await Component.InvokeAsync("Genres")
+    }
