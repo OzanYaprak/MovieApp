@@ -84,5 +84,21 @@ namespace MovieApp.Web.Data
         {
             return _movies.FirstOrDefault(a => a.MovieID == id);
         }
+
+        public static void Edit(Movie duzenle)
+        {
+            foreach (var movie in _movies)
+            {
+                if (movie.MovieID == duzenle.MovieID)
+                {
+                    movie.Title = duzenle.Title;
+                    movie.Description = duzenle.Description;
+                    movie.Director = duzenle.Director;
+                    movie.ImageURL = duzenle.ImageURL;
+                    movie.GenreID = duzenle.GenreID;
+                    break;
+                }
+            }
+        }
     }
 }

@@ -9,7 +9,8 @@
     <div class="col-md-7 order-md-2 ">
         <h2 class="featurette-heading fw-normal lh-1">@Model.Title</h2>
         <p>
-            <a class="btn btn-primary" href="/movies/details/@Model.MovieID">İncele</a>
+            <a class="btn btn-primary" asp-controller="movies" asp-action="details" asp-route-id="@Model.MovieID">İncele</a>
+            <a class="btn btn-primary" asp-controller="movies" asp-action="edit" asp-route-id="@Model.MovieID">Düzenle</a>
         </p>
     </div>
     <div class="col-md-5 order-md-1">

@@ -16,6 +16,7 @@ namespace MovieApp.Web.Data
                 new Genre {GenreID=2,GenreName="Komedi"},
                 new Genre {GenreID=3,GenreName="Romantik"},
                 new Genre {GenreID=4,GenreName="Savaş"},
+                new Genre {GenreID=5,GenreName="Bilim Kurgu"}
             };
         }
 

@@ -14,7 +14,7 @@
                     <a class="nav-link" href="/movies/create">Ekle</a>
                 </li>
                 <li class="nav-item">
-                    <form action="/movies/list" method="get" class="d-flex" role="search">
+                    <form asp-controller="Movies" asp-action="List" method="get" class="d-flex" role="search">
                         <input name="arama" class="form-control me-2 ms-2" type="text" placeholder="Film Ara" aria-label="Arama Yap">
                         <button class="btn btn-outline-success" type="submit">Ara</button>
                     </form>
