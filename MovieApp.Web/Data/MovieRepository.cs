@@ -1,4 +1,5 @@
 ﻿using MovieApp.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -98,6 +99,15 @@ namespace MovieApp.Web.Data
                     movie.GenreID = duzenle.GenreID;
                     break;
                 }
+            }
+        }
+
+        internal static void Delete(int movieid)
+        {
+            var movie = GetById(movieid);
+            if (movie != null)
+            {
+                _movies.Remove(movie);
             }
         }
     }

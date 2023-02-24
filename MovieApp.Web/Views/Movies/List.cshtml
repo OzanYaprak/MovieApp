@@ -5,7 +5,6 @@
 
 <h1>Film Listesi</h1>
 <div id="filmler">
-
     @if (Model.Movies.Count() > 0)
     {
         @foreach (var movie in Model.Movies)
@@ -21,6 +20,16 @@
     }
 
 </div>
+
+@if (TempData["Message"] != null)
+{
+    @section message
+    {
+    @await Html.PartialAsync("_message",(string)TempData["Message"])
+    }
+}
+
+
 
 @section menu
     {

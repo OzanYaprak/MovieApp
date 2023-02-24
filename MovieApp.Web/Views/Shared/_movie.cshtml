@@ -8,10 +8,16 @@
 <div class="row featurette mt-2" style="border: 1px solid">
     <div class="col-md-7 order-md-2 ">
         <h2 class="featurette-heading fw-normal lh-1">@Model.Title</h2>
-        <p>
+        <div>
             <a class="btn btn-primary" asp-controller="movies" asp-action="details" asp-route-id="@Model.MovieID">İncele</a>
-            <a class="btn btn-primary" asp-controller="movies" asp-action="edit" asp-route-id="@Model.MovieID">Düzenle</a>
-        </p>
+            <a class="btn btn-warning" asp-controller="movies" asp-action="edit" asp-route-id="@Model.MovieID">Düzenle</a>
+
+            <form asp-controller="movies" asp-action="delete" method="post" style="display:inline;">
+                <input type="hidden" name="Title" value="@Model.Title" />
+                <input type="hidden" name="MovieID" value="@Model.MovieID" />
+                <button type="submit" class="btn btn-danger">Sil</button>
+            </form>
+        </div>
     </div>
     <div class="col-md-5 order-md-1">
         <img src="~/img/@Model.ImageURL" alt="" />

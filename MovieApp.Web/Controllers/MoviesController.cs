@@ -80,7 +80,7 @@ namespace MovieApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 MovieRepository.Add(ekle);
-
+                TempData["Message"] = $"{ekle.Title} isimli film eklendi.";
                 return RedirectToAction("List", "Movies");
             }
             ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
@@ -101,10 +101,20 @@ namespace MovieApp.Web.Controllers
             if (ModelState.IsValid)
             {
                 MovieRepository.Edit(duzenle);
+                TempData["Message"] = $"{duzenle.Title} isimli film güncellendi.";
                 return RedirectToAction("Details", "Movies", new { @id = duzenle.MovieID });
             }
             ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
             return View(duzenle);
+        }
+
+
+        [HttpPost]
+        public IActionResult Delete(int movieid, string title)
+        {
+            MovieRepository.Delete(movieid);
+            TempData["Message"] = $"{title} isimli film silindi.";
+            return RedirectToAction("List", "Movies");
         }
     }
 }
