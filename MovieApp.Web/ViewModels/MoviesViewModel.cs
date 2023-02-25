@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MovieApp.Web.Models;
+using MovieApp.Web.Entity;
 
 namespace MovieApp.Web.ViewModels
 {
