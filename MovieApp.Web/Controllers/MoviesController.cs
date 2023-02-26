@@ -13,6 +13,20 @@ namespace MovieApp.Web.Controllers
 
     public class MoviesController : Controller
     {
+        private readonly movieContext _context;
+
+        public MoviesController(movieContext context)
+        {
+            _context = context;
+        }
+
+
+
+
+
+
+
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -79,7 +93,7 @@ namespace MovieApp.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                MovieRepository.Add(ekle);
+                //MovieRepository.Add(ekle);
                 TempData["Message"] = $"{ekle.Title} isimli film eklendi.";
                 return RedirectToAction("List", "Movies");
             }

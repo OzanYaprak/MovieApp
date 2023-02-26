@@ -16,8 +16,6 @@ namespace MovieApp.Web.Entity
 
         public string Director { get; set; }
 
-        public string[] Casts { get; set; }
-
         public string ImageURL { get; set; }
 
         [Required]
