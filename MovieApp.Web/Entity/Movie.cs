@@ -14,8 +14,6 @@ namespace MovieApp.Web.Entity
         [MaxLength(100)]
         public string Description { get; set; }
 
-        public string Director { get; set; }
-
         public string ImageURL { get; set; }
 
         [Required]
