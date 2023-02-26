@@ -23,10 +23,6 @@ namespace MovieApp.Web.Controllers
 
 
 
-
-
-
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -42,23 +38,24 @@ namespace MovieApp.Web.Controllers
             //var kelime = HttpContext.Request.Query["arama"].ToString(); //query den gelen arama
 
 
-            var movies = MovieRepository.Movies;
+            //var movies = MovieRepository.Movies;
+            var movies = _context.Movies.AsQueryable();
             if (id != null)
             {
-                movies = movies.Where(a => a.GenreID == id).ToList();
+                movies = movies.Where(a => a.GenreID == id);
             }
 
 
             //arama kısmı için
             if (!string.IsNullOrEmpty(arama)) // boş olmayıp bir değer olduğunda çalışmasını (!) sağlıyoruz.
             {
-                movies = movies.Where(a => a.Title.ToLower().Contains(arama.ToLower()) || a.Description.ToLower().Contains(arama.ToLower())).ToList(); //tolower arama kısmına yazılan büyük harfli kelimeleri otomatik olarak küçük harf e çeviriyor.
+                movies = movies.Where(a => a.Title.ToLower().Contains(arama.ToLower()) || a.Description.ToLower().Contains(arama.ToLower())); //tolower arama kısmına yazılan büyük harfli kelimeleri otomatik olarak küçük harf e çeviriyor.
             }
 
 
             var model = new MoviesViewModel()
             {
-                Movies = movies
+                Movies = movies.ToList()
             };
 
             return View(model);
@@ -67,7 +64,9 @@ namespace MovieApp.Web.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(MovieRepository.GetById(id));
+            //return View(MovieRepository.GetById(id)); ESKİ 
+
+            return View(_context.Movies.Find(id));
         }
 
 
@@ -75,7 +74,8 @@ namespace MovieApp.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
+            //ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName"); ESKİ
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreID", "GenreName");
             return View();
         }
         [HttpPost]
@@ -93,11 +93,15 @@ namespace MovieApp.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                //MovieRepository.Add(ekle);
+                //MovieRepository.Add(ekle); EKİ YÖNTEM REPO KULLANIRKEN YAPILAN
+
+                _context.Movies.Add(ekle);
+                _context.SaveChanges();
                 TempData["Message"] = $"{ekle.Title} isimli film eklendi.";
                 return RedirectToAction("List", "Movies");
             }
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
+            //ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName"); ESKİ
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreID", "GenreName");
             return View();
 
         }
@@ -106,19 +110,23 @@ namespace MovieApp.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
-            return View(MovieRepository.GetById(id));
+            //ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName"); ESKİ
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreID", "GenreName");
+            return View(_context.Movies.Find(id));
         }
         [HttpPost]
         public IActionResult Edit(Movie duzenle)
         {
             if (ModelState.IsValid)
             {
-                MovieRepository.Edit(duzenle);
+                //MovieRepository.Edit(duzenle); ESKİ
+                _context.Movies.Update(duzenle);
+                _context.SaveChanges();
                 TempData["Message"] = $"{duzenle.Title} isimli film güncellendi.";
                 return RedirectToAction("Details", "Movies", new { @id = duzenle.MovieID });
             }
-            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName");
+            //ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreID", "GenreName"); ESKİ
+            ViewBag.Genres = new SelectList(_context.Genres.ToList(), "GenreID", "GenreName");
             return View(duzenle);
         }
 
@@ -126,7 +134,10 @@ namespace MovieApp.Web.Controllers
         [HttpPost]
         public IActionResult Delete(int movieid, string title)
         {
-            MovieRepository.Delete(movieid);
+            //MovieRepository.Delete(movieid); ESKİ
+            var entity = _context.Movies.Find(movieid);
+            _context.Movies.Remove(entity);
+            _context.SaveChanges();
             TempData["Message"] = $"{title} isimli film silindi.";
             return RedirectToAction("List", "Movies");
         }
