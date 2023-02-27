@@ -56,7 +56,7 @@ namespace MovieApp.Web.Data
                         Title="The Craft: Legacy",
                         Description="An eclectic foursome of aspiring teenage witches get more than they bargained for as they lean into their newfound powers.",
                         ImageURL="5.jpg",
-                        Genres = new List<Genre>() { genres[5], genres[1] }
+                        Genres = new List<Genre>() { genres[4], genres[1] }
                     },
                     new Movie {
                         Title="Hard Kill",
