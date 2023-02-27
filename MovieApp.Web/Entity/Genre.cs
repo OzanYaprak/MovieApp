@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieApp.Web.Entity
 {
@@ -9,5 +10,11 @@ namespace MovieApp.Web.Entity
 
         [Required]
         public string GenreName { get; set; }
+
+
+        //NAVİGASYON
+
+        public List<Movie> Movies { get; set; }
+
     }
 }
