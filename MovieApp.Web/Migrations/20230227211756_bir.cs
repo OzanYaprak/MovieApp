@@ -24,6 +24,21 @@ namespace MovieApp.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Movies",
+                columns: table => new
+                {
+                    MovieID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movies", x => x.MovieID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -40,24 +55,26 @@ namespace MovieApp.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movies",
+                name: "GenreMovie",
                 columns: table => new
                 {
-                    MovieID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GenreID = table.Column<int>(type: "int", nullable: false)
+                    GenresGenreID = table.Column<int>(type: "int", nullable: false),
+                    MoviesMovieID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.MovieID);
+                    table.PrimaryKey("PK_GenreMovie", x => new { x.GenresGenreID, x.MoviesMovieID });
                     table.ForeignKey(
-                        name: "FK_Movies_Genres_GenreID",
-                        column: x => x.GenreID,
+                        name: "FK_GenreMovie_Genres_GenresGenreID",
+                        column: x => x.GenresGenreID,
                         principalTable: "Genres",
                         principalColumn: "GenreID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GenreMovie_Movies_MoviesMovieID",
+                        column: x => x.MoviesMovieID,
+                        principalTable: "Movies",
+                        principalColumn: "MovieID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -161,9 +178,9 @@ namespace MovieApp.Web.Migrations
                 column: "PersonID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movies_GenreID",
-                table: "Movies",
-                column: "GenreID");
+                name: "IX_GenreMovie_MoviesMovieID",
+                table: "GenreMovie",
+                column: "MoviesMovieID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_People_UserID",
@@ -182,13 +199,16 @@ namespace MovieApp.Web.Migrations
                 name: "Crews");
 
             migrationBuilder.DropTable(
-                name: "Movies");
+                name: "GenreMovie");
 
             migrationBuilder.DropTable(
                 name: "People");
 
             migrationBuilder.DropTable(
                 name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Users");

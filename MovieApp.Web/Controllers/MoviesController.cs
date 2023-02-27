@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MovieApp.Web.Data;
 using MovieApp.Web.Entity;
 using MovieApp.Web.ViewModels;
@@ -42,7 +43,7 @@ namespace MovieApp.Web.Controllers
             var movies = _context.Movies.AsQueryable();
             if (id != null)
             {
-                movies = movies.Where(a => a.GenreID == id);
+                movies = movies.Include(a => a.Genres).Where(a => a.Genres.Any(g => g.GenreID == id));
             }
 
 
