@@ -11,7 +11,7 @@ using MovieApp.Web.Data;
 namespace MovieApp.Web.Migrations
 {
     [DbContext(typeof(movieContext))]
-    [Migration("20230227211756_bir")]
+    [Migration("20230309192532_bir")]
     partial class bir
     {
         /// <inheritdoc />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LINQSamples.Data;
 
@@ -14,6 +15,8 @@ public partial class NorthwindContext : DbContext
         : base(options)
     {
     }
+
+    public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
     public virtual DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }
 
@@ -57,7 +60,7 @@ public partial class NorthwindContext : DbContext
 
     public virtual DbSet<SalesByCategory> SalesByCategories { get; set; }
 
-    public virtual DbSet<SalesTotalsByAmount> SalesTotalsByAmounts { get; set; }
+    public virtual DbSet<SalesTotalsByAmount> SalesTotalsByAmounts { get; set; } 
 
     public virtual DbSet<Shipper> Shippers { get; set; }
 
@@ -70,7 +73,9 @@ public partial class NorthwindContext : DbContext
     public virtual DbSet<Territory> Territories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Database=Northwind;Integrated Security=SSPI;");
+        => optionsBuilder
+            .UseLoggerFactory(MyLoggerFactory)
+            .UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Database=Northwind;Integrated Security=SSPI;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
