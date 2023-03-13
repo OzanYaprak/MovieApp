@@ -2,6 +2,7 @@
 
 
 using LINQSamples.Data;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 class ProductModel
 {
@@ -15,82 +16,34 @@ class Program
     {
         using (var db = new NorthwindContext())
         {
-            // Tüm müşteri kayıtlarını getiriniz (Customers)
-            //var customers = db.Customers.ToList();
+            //var result = db.Products.Count(); // Product tablosundaki ürünlerin sayısını göster  FOREACH YOK
 
+            //var result = db.Products.Count(a => a.UnitPrice >= 10 && a.UnitPrice <= 30);  // unitprice 10 dahil 10 dan büyük ve 30 dahil 30 dan küçük olanları listele. FOREACH YOK
 
-            //foreach (var customer in customers)
-            //{
-            //    Console.WriteLine(customer.ContactName);
-            //}
+            //var result = db.Products.Count(a => a.Discontinued == false); // Satışta olan ürünleri listele. FOREACH YOK
 
+            //var result = db.Products.Min(a => a.UnitPrice);  // Satışta olan minimum fiyat FOREACH YOK
 
+            //var result = db.Products.Max(a => a.UnitPrice);  // Satışta olan maksimum fiyat FOREACH YOK
 
-            // Tüm müşterilerin sadece CustomerID ve ContactName kolonlarını getiriniz.
-            //var customers = db.Customers.Select(a => new { a.CustomerId, a.ContactName }).ToList();
+            //var result = db.Products.Where(a => a.CategoryId == 2).Max(a => a.UnitPrice);  // Kategori ıd si 2 olan kategorideki maksimum fiyatı listele FOREACH YOK
 
+            //var result = db.Products.Average(a => a.UnitPrice); // Bütün ürünlerin ortalama fiyatlarını ver. FOREACH YOK
 
-            //foreach (var customer in customers)
-            //{
-            //    Console.WriteLine(customer.CustomerId + " " + customer.ContactName);
-            //}
+            //var result = db.Products.Where(a => a.Discontinued == false).Average(a => a.UnitPrice); // Satışta olan bütün ürünlerin ortalama fiyatlarını ver. FOREACH YOK
 
+            //var result = db.Products.Where(a => a.Discontinued == false).Sum(a => a.UnitPrice); // Satışta olan bütün ürünlerin toplam fiyatlarını ver. FOREACH YOK
 
+            //var result = db.Products.OrderBy(a => a.UnitPrice).ToList(); // Ürün fiyatı artarak giden liste (EN DÜŞÜK FİYATLI OLAN ÜRÜN EN BAŞTA)
 
-            // Almanyada yaşayan müşterilerin adlarını getiriniz.
-            //var customers = db.Customers.Select(a => new { a.ContactName, a.Country }).Where(a => a.Country == "Germany").ToList();
+            //var result = db.Products.OrderByDescending(a => a.UnitPrice).ToList(); // Ürün fiyatı artarak giden liste (EN YÜKSEK FİYATLI OLAN ÜRÜN EN BAŞTA)
 
+            //var result = db.Products.OrderByDescending(a => a.UnitPrice).FirstOrDefault();  // Ürün fiyatı artarak giden liste içindeki ilk ürünü yazdırır
 
-            //foreach (var customer in customers)
-            //{
-            //    Console.WriteLine(customer.ContactName + " " + customer.Country);
-            //}
+            //var result = db.Products.OrderByDescending(a => a.UnitPrice).LastOrDefault(); // Ürün fiyatı artarak giden liste içindeki son ürünü yazdırır
 
+            Console.WriteLine(result.ProductName + " " + result.UnitPrice);
 
-
-            // "Diego Roel" isimli müşteri nerede yaşamaktadır ?
-            //var customer = db.Customers.Where(a => a.ContactName == "Diego Roel").FirstOrDefault();
-            //Console.WriteLine(customer.ContactName + " " + customer.Country);
-
-
-
-            // Stokta olmayan ürünler hangileridir ?
-            //var products = db.Products.Select(a => new { a.ProductName, a.UnitsInStock }).Where(a => a.UnitsInStock == 0).ToList();
-
-            //foreach (var product in products)
-            //{
-            //    Console.WriteLine(product.ProductName + " " + product.UnitsInStock);
-            //}
-
-
-
-            // Tüm çalışanların ad ve soyadlarını tek kolon şeklinde getiriniz.
-            //var employess = db.Employees.Select(a => new { FullName = a.FirstName + " " + a.LastName }).ToList();
-
-            //foreach (var employee in employess)
-            //{
-            //    Console.WriteLine(employee.FullName);
-            //}
-
-
-
-            // Ürünler tablosundaki ilk 5 kaydı alınız.
-            //var products = db.Products.Take(5).ToList();
-
-            //foreach (var product in products)
-            //{
-            //    Console.WriteLine(product.ProductId + " " + product.ProductName);
-            //}
-
-
-
-            // Ürünler tablosundaki ikinci 5 kaydı alınız. (Take, Skip)
-            //var products = db.Products.Skip(5).Take(5).ToList();
-
-            //foreach (var product in products)
-            //{
-            //    Console.WriteLine(product.ProductId + " " + product.ProductName);
-            //}
         }
 
         Console.ReadLine();
@@ -98,6 +51,90 @@ class Program
 
 
 
+    private static void LINQORNEKLER()
+    {
+        //using (var db = new NorthwindContext())
+        //{
+        //    // Tüm müşteri kayıtlarını getiriniz (Customers)
+        //    //var customers = db.Customers.ToList();
+
+
+        //    //foreach (var customer in customers)
+        //    //{
+        //    //    Console.WriteLine(customer.ContactName);
+        //    //}
+
+
+
+        //    // Tüm müşterilerin sadece CustomerID ve ContactName kolonlarını getiriniz.
+        //    //var customers = db.Customers.Select(a => new { a.CustomerId, a.ContactName }).ToList();
+
+
+        //    //foreach (var customer in customers)
+        //    //{
+        //    //    Console.WriteLine(customer.CustomerId + " " + customer.ContactName);
+        //    //}
+
+
+
+        //    // Almanyada yaşayan müşterilerin adlarını getiriniz.
+        //    //var customers = db.Customers.Select(a => new { a.ContactName, a.Country }).Where(a => a.Country == "Germany").ToList();
+
+
+        //    //foreach (var customer in customers)
+        //    //{
+        //    //    Console.WriteLine(customer.ContactName + " " + customer.Country);
+        //    //}
+
+
+
+        //    // "Diego Roel" isimli müşteri nerede yaşamaktadır ?
+        //    //var customer = db.Customers.Where(a => a.ContactName == "Diego Roel").FirstOrDefault();
+        //    //Console.WriteLine(customer.ContactName + " " + customer.Country);
+
+
+
+        //    // Stokta olmayan ürünler hangileridir ?
+        //    //var products = db.Products.Select(a => new { a.ProductName, a.UnitsInStock }).Where(a => a.UnitsInStock == 0).ToList();
+
+        //    //foreach (var product in products)
+        //    //{
+        //    //    Console.WriteLine(product.ProductName + " " + product.UnitsInStock);
+        //    //}
+
+
+
+        //    // Tüm çalışanların ad ve soyadlarını tek kolon şeklinde getiriniz.
+        //    //var employess = db.Employees.Select(a => new { FullName = a.FirstName + " " + a.LastName }).ToList();
+
+        //    //foreach (var employee in employess)
+        //    //{
+        //    //    Console.WriteLine(employee.FullName);
+        //    //}
+
+
+
+        //    // Ürünler tablosundaki ilk 5 kaydı alınız.
+        //    //var products = db.Products.Take(5).ToList();
+
+        //    //foreach (var product in products)
+        //    //{
+        //    //    Console.WriteLine(product.ProductId + " " + product.ProductName);
+        //    //}
+
+
+
+        //    // Ürünler tablosundaki ikinci 5 kaydı alınız. (Take, Skip)
+        //    //var products = db.Products.Skip(5).Take(5).ToList();
+
+        //    //foreach (var product in products)
+        //    //{
+        //    //    Console.WriteLine(product.ProductId + " " + product.ProductName);
+        //    //}
+        //}
+
+        //Console.ReadLine();
+    }
     private static void FiltrelemeSorguları(NorthwindContext db)
     {
         //var products = db.Products.Where(a=>a.UnitPrice>18).ToList();
