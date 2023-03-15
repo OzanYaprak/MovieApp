@@ -4,6 +4,8 @@
 using LINQSamples.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Linq.Expressions;
 
 class ProductModel
 {
@@ -15,11 +17,148 @@ class Program
 {
     static void Main(string[] args)
     {
-        using (var db = new NorthwindContext()) 
+        using (var db = new NorthwindContext())
         {
+            // YÖNTEM 1
 
+
+
+            //var products = db.Products.Where(a=>a.Category.CategoryId == 1).ToList();
+
+            //foreach (var product in products) 
+            //{
+            //    Console.WriteLine(product.CategoryId+" "+product.ProductName);
+            //}
+
+
+
+
+            // YÖNTEM 2
+
+
+
+            //var products = db.Products.Include(a=>a.Category).Where(a=>a.Category.CategoryId == 1).ToList();
+
+            //foreach (var product in products)
+            //{
+            //    Console.WriteLine(product.CategoryId + " " + product.Category.CategoryName + " " + product.ProductName);
+            //}
+
+
+
+
+            // YÖNTEM 2 ALTERNATİF
+
+
+
+
+            //var products = db.Products.Where(a=>a.Category.CategoryId == 1)
+            //    .Select(a=>new 
+            //    {
+            //        name = a.ProductName,
+            //        id = a.CategoryId,
+            //        categoryname = a.Category.CategoryName
+
+            //    }).ToList();
+
+
+            //foreach (var product in products)
+            //{
+            //    Console.WriteLine(product.name + " " + product.id + " " + product.categoryname);
+            //}
+
+
+
+
+            // YÖNTEM 3
+
+
+
+
+            //var categories = db.Categories.Where(a => a.Products.Count() == 0).ToList();
+
+            //foreach (var category in categories)
+            //{
+            //    Console.WriteLine(category.CategoryName);
+            //}
+
+
+
+
+            // YÖNTEM 3 ALTERNATİF (DAHA PERFORMANSLI)
+            // Any true/false değer döndürüyor (olumsuz için =>! yapabiliriz)
+
+
+            //var categories = db.Categories.Where(a => a.Products.Any()).ToList();
+
+            //foreach (var category in categories)
+            //{
+            //    Console.WriteLine(category.CategoryName);
+            //}
+
+
+
+
+            // YÖNTEM 4
+
+
+
+
+            //var products = db.Products.Select(a => new
+            //{
+            //    companyName = a.Supplier.CompanyName,
+            //    contactName = a.Supplier.ContactName,
+            //    a.ProductName
+            //});
+
+            //foreach (var product in products)
+            //{
+            //    Console.WriteLine(product.ProductName + " " + product.companyName + " " + product.contactName);
+            //}
+
+
+
+
+            //(QUERY EXPRESSIONS )
+
+            // YÖNTEM 5 
+
+
+
+
+            //var products = (from p in db.Products
+            //                where p.UnitPrice > 10
+            //                select p).ToList();
+
+            //Console.WriteLine(products.Count); // Kaç tane olduğunu göstermek için
+            //foreach (var product in products)
+            //{
+            //    Console.WriteLine(product.ProductName);
+            //}
+
+
+
+
+
+            // YÖNTEM 6
+
+
+
+            //var products = (from p in db.Products
+            //                join s in db.Suppliers on p.SupplierId equals s.SupplierId 
+            //                select new
+            //                {
+            //                    p.ProductName,
+            //                    contactName = s.ContactName,
+            //                    companyName = s.CompanyName,
+            //                }).ToList();
+
+            //foreach (var product in products) 
+            //{
+            //    Console.WriteLine(product.ProductName + " " + product.companyName + " " + product.contactName);
+            //}
         }
-            
+
         Console.ReadLine();
     }
 
