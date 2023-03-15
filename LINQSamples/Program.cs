@@ -2,6 +2,7 @@
 
 
 using LINQSamples.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 class ProductModel
@@ -14,19 +15,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        using (var db = new NorthwindContext())
+        using (var db = new NorthwindContext()) 
         {
-            var product = db.Products.FirstOrDefault(a => a.ProductId == 1);
 
-            if (product != null) 
-            {
-                product.UnitsInStock += 10;
-                db.SaveChanges();
-
-                Console.WriteLine("Veri Güncellendi.");
-            }
         }
-
+            
         Console.ReadLine();
     }
 
@@ -196,6 +189,113 @@ class Program
         //Console.WriteLine(p1.ProductId);
         //Console.WriteLine(p2.ProductId);
 
+    }
+    private static void KayıtGuncellemeSorguları()
+    {
+        {
+
+
+            // SEÇİLİ BİR PRODUCT İÇİN GÜNCELLEME YAPMA ( CHANGE TRACKING )
+
+
+
+            //var product = db.Products.FirstOrDefault(a => a.ProductId == 1);
+
+            //if (product != null) 
+            //{
+            //    product.UnitsInStock += 10;
+            //    db.SaveChanges();
+
+            //    Console.WriteLine("Veri Güncellendi.");
+            //}
+
+
+
+
+            // SEÇİLİ BİR PRODUCT İÇİN GÜNCELLEME YAPMA 2.YÖNTEM (BU YÖNTEMDE += OPERATÖRÜ İLE DEĞİLDE DİREKT İSTEDİĞİMİZ RAKAMI GİREBİLİRİZ.)
+
+
+
+
+            //var product = new Product() { ProductId = 1 };
+
+            //db.Products.Attach(product);
+
+            //product.UnitsInStock = 20;
+
+            //db.SaveChanges();
+
+            //Console.WriteLine("Veri Güncellendi.");
+
+
+
+
+
+
+            // SEÇİLİ BİR PRODUCT İÇİN GÜNCELLEME YAPMA 3.YÖNTEM
+
+
+
+
+
+            //var product = db.Products.Find(1);
+
+            //if (product != null)
+            //{
+            //    product.UnitPrice = 28;
+
+            //    db.Update(product);
+            //    db.SaveChanges();
+            //}
+
+            //Console.WriteLine("Veri Güncellendi.");
+        }
+    }
+    private static void KayıtSilmeSorguları()
+    {
+        {
+            // SİLME İŞLEMİ YÖNTEM 1
+
+
+            //var products = db.Products.Find(84);
+
+            //if (products != null) 
+            //{
+            //    db.Products.Remove(products);
+            //    db.SaveChanges();
+            //}
+
+
+
+
+
+
+            // SİLME İŞLEMİ YÖNTEM 2
+
+
+            //var products = new Product() { ProductId = 82 };
+
+            //db.Products.Remove(products);
+            //db.SaveChanges();
+
+
+
+
+
+
+            // SİLME İŞLEMİ YÖNTEM 3 ( LİSTE OLARAK SİLME İŞLEMİ )
+
+
+            //var product1 = new Product() { ProductId = 80 };
+            //var product2 = new Product() { ProductId = 81 };
+
+            //var products = new List<Product>() { product1, product2 };
+
+            //db.Products.RemoveRange(products);
+            //db.SaveChanges();
+
+
+        }
     }
     private static void SıralamaVeHesaplamaSorguları()
     {
