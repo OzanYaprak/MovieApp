@@ -30,5 +30,7 @@ namespace MovieApp.Web.ViewModels
 
         public string ImageURL { get; set; }
 
+        public List<Genre> SelectedGenres { get; set; }
+
     }
 }

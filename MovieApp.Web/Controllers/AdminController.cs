@@ -53,9 +53,11 @@ namespace MovieApp.Web.Controllers
                 Title = a.Title,
                 ImageURL = a.ImageURL,
                 Description = a.Description,
+                SelectedGenres = a.Genres
 
             }).FirstOrDefault(a => a.MovieID == id);
 
+            ViewBag.Genres = _context.Genres.ToList();
 
             if (entity == null)
             {
