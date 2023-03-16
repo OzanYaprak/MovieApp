@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieApp.Web.Data;
+using MovieApp.Web.Entity;
 using MovieApp.Web.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MovieApp.Web.Controllers
@@ -71,9 +73,9 @@ namespace MovieApp.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult MovieUpdate(AdminEditMovieViewModel model)
+        public IActionResult MovieUpdate(AdminEditMovieViewModel model, int[] genreId)
         {
-            var entity = _context.Movies.Find(model.MovieID);
+            var entity = _context.Movies.Include(a => a.Genres).FirstOrDefault(a => a.MovieID == model.MovieID);
 
             if (entity == null)
             {
@@ -83,10 +85,27 @@ namespace MovieApp.Web.Controllers
             entity.Title = model.Title;
             entity.Description = model.Description;
             entity.ImageURL = model.ImageURL;
+            entity.Genres = genreId.Select(id => _context.Genres.FirstOrDefault(a => a.GenreID == id)).ToList();
 
             _context.SaveChanges();
 
             return RedirectToAction("MovieList");
+        }
+
+
+
+        public IActionResult GenreList()
+        {
+            return View(new AdminGenresViewModel
+            {
+                Genres = _context.Genres.Select(a => new AdminGenreViewModel
+                {
+                    GenreID = a.GenreID,
+                    GenreName = a.GenreName,
+                    Count = a.Movies.Count
+
+                }).ToList()
+            });
         }
     }
 }

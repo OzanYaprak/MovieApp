@@ -3,9 +3,10 @@
 <h1>Edit Movie</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-8">
-        <form method="post" asp-controller="Admin" asp-action="MovieUpdate">
+<form method="post" asp-controller="Admin" asp-action="MovieUpdate">
+
+    <div class="row">
+        <div class="col-md-8">
             <input type="hidden" name="MovieID" value="@Model.MovieID" />
             <div class="form-group">
                 <label asp-for="Title"></label>
@@ -24,20 +25,20 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Güncelle</button>
-        </form>
-    </div>
+        </div>
 
-    <div class="col-md-4">
+        <div class="col-md-4">
 
-        @foreach (var item in (List<Genre>)ViewBag.Genres)
-        {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="genre_@(item.GenreID)" @(Model.SelectedGenres.Any(a=>a.GenreID==item.GenreID)?"checked":"")>
-                <label class="form-check-label" for="genre_@(item.GenreID)">
-                    @item.GenreName
-                </label>
-            </div>
-        }
+            @foreach (var item in (List<Genre>)ViewBag.Genres)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="genreId" value="@item.GenreID" id="genre_@(item.GenreID)" @(Model.SelectedGenres.Any(a => a.GenreID == item.GenreID) ? "checked" : "")>
+                    <label class="form-check-label" for="genre_@(item.GenreID)">
+                        @item.GenreName
+                    </label>
+                </div>
+            }
+        </div>
     </div>
-</div>
+</form>
 
