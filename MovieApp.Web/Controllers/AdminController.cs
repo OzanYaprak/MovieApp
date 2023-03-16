@@ -25,8 +25,8 @@ namespace MovieApp.Web.Controllers
             return View(new AdminMoviesViewModel
             {
                 Movies = _context.Movies
-                .Include(a=>a.Genres)
-                .Select(a=>new AdminMovieViewModel 
+                .Include(a => a.Genres)
+                .Select(a => new AdminMovieViewModel
                 {
                     MovieID = a.MovieID,
                     Title = a.Title,
@@ -35,6 +35,56 @@ namespace MovieApp.Web.Controllers
 
                 }).ToList()
             });
+        }
+
+
+        [HttpGet]
+        public IActionResult MovieUpdate(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var entity = _context.Movies.Select(a => new AdminEditMovieViewModel
+            {
+
+                MovieID = a.MovieID,
+                Title = a.Title,
+                ImageURL = a.ImageURL,
+                Description = a.Description,
+
+            }).FirstOrDefault(a => a.MovieID == id);
+
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(entity);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult MovieUpdate(AdminEditMovieViewModel model)
+        {
+            var entity = _context.Movies.Find(model.MovieID);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.ImageURL = model.ImageURL;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieList");
         }
     }
 }

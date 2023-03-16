@@ -28,8 +28,8 @@
                     </ul>
                 </td>
                 <td>
-                    <a href="#" class="btn btn-primary btn-sm">Update</a>
-                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-controller="Admin" asp-action="MovieUpdate" asp-route-id="@movie.MovieID" class="btn btn-primary btn-sm">Update</a>
+                    <a asp-controller="Admin" asp-action="MovieDelete" asp-route-id="@movie.MovieID" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

@@ -19,4 +19,16 @@ namespace MovieApp.Web.ViewModels
 
         public List<Genre> Genres { get; set; }
     }
+
+    public class AdminEditMovieViewModel
+    {
+        public int MovieID { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public string ImageURL { get; set; }
+
+    }
 }
