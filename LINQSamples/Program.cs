@@ -18,6 +18,19 @@ class Program
     static void Main(string[] args)
     {
         using (var db = new NorthwindContext())
+
+        {
+
+        }
+
+        Console.ReadLine();
+    }
+
+
+
+
+    private static void BirdenFazlaTabloÇalışması_1ASAMA()
+    {
         {
             // YÖNTEM 1
 
@@ -158,10 +171,74 @@ class Program
             //    Console.WriteLine(product.ProductName + " " + product.companyName + " " + product.contactName);
             //}
         }
+    }
+    private static void BirdenFazlaTabloÇalışması_2ASAMA()
+    {
+        {
 
-        Console.ReadLine();
+
+            // HİÇ SİPARİŞ VERMEYENLERİ LİSTELEME
+
+
+
+
+            //var customers = db.Customers.Where(a=>a.Orders.Count() == 0).Select(a=> new { a.ContactName }).ToList();
+
+            //foreach (var customer in customers)
+            //{
+            //    Console.WriteLine(customer.ContactName);
+            //}
+
+
+
+            // BİRDEN FAZLA SİPARİŞ VERENLERİ ARTAN ŞEKLİ İLE LİSTELENMESİ 
+
+
+
+            //var customers = db.Customers
+            //    .Where(a => a.Orders.Count() > 0)
+            //    .Select(a => new 
+            //    { a.ContactName,
+            //      OrderCount = a.Orders.Count()
+            //    })
+            //    .OrderBy(a => a.OrderCount)
+            //    .ToList();
+
+            //foreach (var customer in customers)
+            //{
+            //    Console.WriteLine(customer.ContactName +" => "+ customer.OrderCount);
+            //}
+        }
     }
 
+    private static void SQLSORUGLARININENTITYFRAMEWORKILEKULLANILMASI()
+    {
+        {
+            // LİSTELEME İŞLEMİ
+
+
+            //var products = db.Products.FromSqlRaw("select * from products where categoryId=4").ToList();
+
+            //foreach (var product in products) 
+            //{
+            //    Console.WriteLine(product.ProductName);
+            //}
+
+
+            // GÜNCELLEME İŞLEMİ
+
+
+            //var sonuc = db.Database.ExecuteSqlRaw("update products set unitprice=unitprice*1.2 where categoryId=4");
+            //Console.WriteLine(sonuc);
+
+
+            // SİLME İŞLEMİ
+
+
+            //var sonuc = db.Database.ExecuteSqlRaw("delete from products where productId=79");
+            //Console.WriteLine(sonuc);
+        }
+    }
 
     private static void LINQORNEKLER()
     {
