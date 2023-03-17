@@ -107,5 +107,51 @@ namespace MovieApp.Web.Controllers
                 }).ToList()
             });
         }
+
+
+
+        public IActionResult GenreUpdate(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var entity = _context.Genres
+                .Select(a=> new AdminGenreEditViewModel
+                {
+                    GenreID=a.GenreID,
+                    GenreName=a.GenreName,
+                    Movies = a.Movies.Select(a=> new AdminMovieViewModel
+                    {
+                        MovieID=a.MovieID,
+                        Title = a.Title,
+                        ImageURL = a.ImageURL,
+                    }).ToList()
+                })
+                .FirstOrDefault(a=>a.GenreID == id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(entity);
+        } 
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

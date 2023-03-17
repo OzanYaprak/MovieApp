@@ -16,4 +16,25 @@ namespace MovieApp.Web.ViewModels
         public int Count { get; set; }
 
     }
+
+
+    public class AdminGenreEditViewModel
+    {
+        public int GenreID { get; set; }
+
+        public string GenreName { get; set; }
+
+        public List<AdminMovieViewModel> Movies { get; set; }
+
+    }
+
+
+
+
+
+
+
+
+
+
 }
