@@ -10,7 +10,7 @@
             <th style="width:70px;">Count</th>
             <th style="width:160px;"></th>
         </tr>
-    </thead>   
+    </thead>
     <tbody>
         @foreach (var genre in Model.Genres)
         {
@@ -20,7 +20,10 @@
                 <td>@genre.Count</td>
                 <td>
                     <a asp-controller="Admin" asp-action="GenreUpdate" asp-route-id="@genre.GenreID" class="btn btn-warning btn-sm">Update</a>
-                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    <form asp-controller="Admin" asp-action="GenreDelete" method="post" style="display:inline;">
+                        <input type="hidden" name="genreid" value="@genre.GenreID" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </td>
             </tr>
         }

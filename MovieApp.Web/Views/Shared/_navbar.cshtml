@@ -17,7 +17,7 @@
                     <a class="nav-link" href="/movies/list">Liste</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/movies/create">Ekle</a>
+                    <a asp-controller="Admin" asp-action="moviecreate" class="nav-link">Admin Film Ekle</a>
                 </li>
                 <li class="nav-item">
                     <form asp-controller="Movies" asp-action="List" method="get" class="d-flex" role="search">

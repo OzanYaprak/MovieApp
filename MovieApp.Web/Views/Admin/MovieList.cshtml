@@ -29,7 +29,12 @@
                 </td>
                 <td>
                     <a asp-controller="Admin" asp-action="MovieUpdate" asp-route-id="@movie.MovieID" class="btn btn-primary btn-sm">Update</a>
-                    <a asp-controller="Admin" asp-action="MovieDelete" asp-route-id="@movie.MovieID" class="btn btn-danger btn-sm">Delete</a>
+
+                    <form asp-controller="Admin" asp-action="MovieDelete" method="post" style="display:inline;">
+                        <input type="hidden" name="movieid" value="@movie.MovieID" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+
                 </td>
             </tr>
         }
